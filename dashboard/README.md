@@ -1,7 +1,7 @@
 # MotionSense-AI Dashboard
 
 An interactive Streamlit dashboard for the MotionSense-AI human activity
-recognition project — built on top of your actual trained Random Forest
+recognition project — built on top of the actual trained Random Forest
 model and processed datasets.
 
 ## Pages
@@ -12,7 +12,7 @@ model and processed datasets.
 - **📊 EDA** — class balance, correlation heatmap, box plots, scatter plots,
   histograms
 - **🌲 Model Performance** — confusion matrix, classification report,
-  feature importance (computed live from your saved `.joblib` model)
+  feature importance (computed live from the saved `.joblib` model)
 - **🎯 Live Prediction** — predict activity from manual sensor sliders, a
   randomly sampled real reading, or an uploaded CSV of sensor readings
 
