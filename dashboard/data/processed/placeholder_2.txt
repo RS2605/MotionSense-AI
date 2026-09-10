@@ -1,0 +1,4 @@
+The processed folder contains :
+Cleaned dataset : motionsense_clean.csv
+ML-Ready dataset: motionsense_ml_ready.csv 
+Final trained ML Model: motionsense_final_model.joblib
