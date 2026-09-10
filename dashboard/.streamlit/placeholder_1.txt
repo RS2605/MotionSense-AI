@@ -1,0 +1,1 @@
+Streamlit Configuration files present in the .streamlit folder
