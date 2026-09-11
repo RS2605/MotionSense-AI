@@ -1,0 +1,481 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sky-top: #7dd3fc;
+  --sky-mid: #bae6fd;
+  --sky-low: #e0f2fe;
+  --sun: #fde68a;
+  --ink: #0c4a6e;
+  --glass-bg: rgba(255, 255, 255, 0.42);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Manrope", system-ui, sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #e0f2fe 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(224, 242, 254, 0.4); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #38bdf8, #0284c7);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover { background: #0369a1; }
+
+::selection { background: #38bdf8; color: white; }
+
+/* -------- Glass panels -------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 24px;
+}
+.glass-dark {
+  background: rgba(12, 74, 110, 0.55);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  border-radius: 20px;
+}
+.glass-hover {
+  transition: transform 320ms cubic-bezier(.2,.8,.2,1), box-shadow 320ms ease, background 320ms ease;
+}
+.glass-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 60px rgba(14, 165, 233, 0.25);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* -------- Typography specials -------- */
+.title-hero {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  background: linear-gradient(135deg, #0c4a6e 10%, #0284c7 45%, #8b5cf6 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(255,255,255,0.6));
+}
+.title-hero .italic-word {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 60%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-eyebrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #0284c7;
+}
+
+/* -------- Sky environment -------- */
+.sky-env {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 900px 500px at 12% 18%, rgba(253, 230, 138, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 1200px 700px at 88% 8%, rgba(196, 181, 253, 0.35) 0%, transparent 60%),
+    linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #e0f2fe 100%);
+}
+
+.sun {
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fef3c7 0%, #fde68a 35%, rgba(253, 230, 138, 0) 70%);
+  filter: blur(2px);
+  animation: sunGlow 6s ease-in-out infinite;
+}
+
+.cloud {
+  position: absolute;
+  border-radius: 100px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.65) 55%, rgba(255,255,255,0) 75%);
+  filter: blur(4px);
+  will-change: transform;
+}
+
+.cloud::before, .cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 100px;
+  background: inherit;
+}
+.cloud::before { top: -30%; left: 15%; width: 55%; height: 90%; }
+.cloud::after  { top: -18%; left: 45%; width: 45%; height: 75%; }
+
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.particle {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0));
+  animation: floatParticle 14s linear infinite;
+}
+
+/* -------- Buttons -------- */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 60%, #8b5cf6 100%);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(14, 165, 233, 0.5), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #0c4a6e;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.6);
+  transition: all 220ms ease;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.85); transform: translateY(-1px); }
+
+/* -------- Nav pill -------- */
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  color: #0c4a6e;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 260ms cubic-bezier(.2,.8,.2,1);
+  border: 1px solid transparent;
+}
+.nav-pill:hover {
+  background: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,0.7);
+}
+.nav-pill.active {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0284c7 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* -------- Stagger animation -------- */
+.stagger > * { animation: fadeInUp 0.7s ease-out both; }
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.15s; }
+.stagger > *:nth-child(3) { animation-delay: 0.25s; }
+.stagger > *:nth-child(4) { animation-delay: 0.35s; }
+.stagger > *:nth-child(5) { animation-delay: 0.45s; }
+.stagger > *:nth-child(6) { animation-delay: 0.55s; }
+
+@keyframes fadeInUp {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes sunGlow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.04); }
+}
+@keyframes floatParticle {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.9; }
+  100% { transform: translateY(-110vh) translateX(80px); opacity: 0; }
+}
+
+/* -------- Football trajectory (Home only) -------- */
+.football-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.football {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 30%),
+    radial-gradient(circle at 50% 50%, #f8fafc 0%, #cbd5e1 70%, #64748b 100%);
+  box-shadow:
+    inset -6px -8px 12px rgba(0,0,0,0.25),
+    inset 4px 4px 8px rgba(255,255,255,0.7),
+    0 6px 18px rgba(0,0,0,0.25);
+  animation: ballFly 14s ease-in-out forwards;
+}
+.football::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, #0f172a 5%, transparent 6%),
+    radial-gradient(circle at 65% 40%, #0f172a 4%, transparent 5%),
+    radial-gradient(circle at 50% 65%, #0f172a 5%, transparent 6%),
+    radial-gradient(circle at 25% 65%, #0f172a 3%, transparent 4%),
+    radial-gradient(circle at 70% 70%, #0f172a 4%, transparent 5%);
+  opacity: 0.75;
+}
+.football::after {
+  content: "";
+  position: absolute;
+  top: 15%; left: 20%;
+  width: 30%; height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0));
+  filter: blur(1px);
+}
+
+/* Curved parabolic path via keyframes */
+@keyframes ballFly {
+  0%   { transform: translate(-6vw, 60vh) rotate(0deg) scale(0.7); opacity: 0; }
+  8%   { opacity: 1; }
+  25%  { transform: translate(25vw, 15vh) rotate(220deg) scale(1); }
+  50%  { transform: translate(52vw, 8vh)  rotate(440deg) scale(1); }
+  75%  { transform: translate(78vw, 18vh) rotate(660deg) scale(0.95); }
+  92%  { opacity: 1; }
+  100% { transform: translate(108vw, 62vh) rotate(900deg) scale(0.7); opacity: 0; }
+}
+
+.ball-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ball-trail path {
+  fill: none;
+  stroke: url(#trailGradient);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 3 6;
+  opacity: 0.35;
+  animation: trailFade 14s ease-in-out forwards;
+}
+@keyframes trailFade {
+  0% { opacity: 0; }
+  15% { opacity: 0.5; }
+  85% { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+
+/* -------- Sensor wave background (subtle for data/model/prediction pages) -------- */
+.sensor-waves {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* -------- Custom range sliders (white base + colored fill/thumb) -------- */
+.ms-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(2, 132, 199, 0.22);
+  box-shadow: inset 0 1px 2px rgba(2, 132, 199, 0.12);
+  transition: box-shadow 200ms ease;
+}
+.ms-slider:hover { box-shadow: inset 0 1px 3px rgba(2, 132, 199, 0.2); }
+
+.ms-slider.acc {
+  background: linear-gradient(
+    to right,
+    #0ea5e9 0%,
+    #38bdf8 var(--fill, 50%),
+    rgba(255,255,255,0.9) var(--fill, 50%),
+    rgba(255,255,255,0.9) 100%
+  );
+}
+.ms-slider.gyro {
+  background: linear-gradient(
+    to right,
+    #8b5cf6 0%,
+    #a78bfa var(--fill, 50%),
+    rgba(255,255,255,0.9) var(--fill, 50%),
+    rgba(255,255,255,0.9) 100%
+  );
+}
+
+/* WebKit thumb */
+.ms-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: grab;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.ms-slider.acc::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  box-shadow: 0 3px 8px rgba(14, 165, 233, 0.5);
+}
+.ms-slider.gyro::-webkit-slider-thumb {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.5);
+}
+.ms-slider::-webkit-slider-thumb:hover { transform: scale(1.12); }
+.ms-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.05); }
+
+/* Firefox */
+.ms-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(2, 132, 199, 0.22);
+}
+.ms-slider.acc::-moz-range-progress {
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+  height: 6px;
+  border-radius: 999px;
+}
+.ms-slider.gyro::-moz-range-progress {
+  background: linear-gradient(to right, #8b5cf6, #a78bfa);
+  height: 6px;
+  border-radius: 999px;
+}
+.ms-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: grab;
+}
+.ms-slider.acc::-moz-range-thumb {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  box-shadow: 0 3px 8px rgba(14, 165, 233, 0.5);
+}
+.ms-slider.gyro::-moz-range-thumb {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.5);
+}
+
+/* Responsive tweaks */
+
+/* Plotly fullscreen mode — force a clean white background & fill viewport */
+.plotly-chart-container:fullscreen {
+  background: #ffffff !important;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.plotly-chart-container:fullscreen .js-plotly-plot,
+.plotly-chart-container:fullscreen .plot-container {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+.plotly-chart-container:-webkit-full-screen {
+  background: #ffffff !important;
+}
+
+/* ------- Custom modebar button ordering (Data Explorer plots) ------- */
+/* Flatten Plotly's nested .modebar-group children into one flex row so
+   `order` on each button works across groups. */
+.plotly-chart-container .modebar {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: 12px;
+  padding: 3px 6px;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+}
+.plotly-chart-container .modebar-group {
+  display: contents !important;
+  background: transparent !important;
+}
+/* Make icons a readable dark-blue instead of white on white */
+.plotly-chart-container .modebar-btn .icon path,
+.plotly-chart-container .modebar-btn svg path {
+  fill: #0c4a6e !important;
+  transition: fill 180ms ease;
+}
+.plotly-chart-container .modebar-btn:hover .icon path,
+.plotly-chart-container .modebar-btn:hover svg path {
+  fill: #0284c7 !important;
+}
+.plotly-chart-container .modebar-btn.active .icon path,
+.plotly-chart-container .modebar-btn.active svg path {
+  fill: #8b5cf6 !important;
+}
+.plotly-chart-container .modebar-btn:hover {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-radius: 6px;
+}
+/* Requested order: zoomOut, zoomIn, autoScale, downloadPNG, fullscreen,
+                    resetAxes, pan, zoom, share */
+.plotly-chart-container .modebar-btn[data-title="Zoom out"]              { order: 1; }
+.plotly-chart-container .modebar-btn[data-title="Zoom in"]               { order: 2; }
+.plotly-chart-container .modebar-btn[data-title="Autoscale"]             { order: 3; }
+.plotly-chart-container .modebar-btn[data-title="Download plot as PNG"]  { order: 4; }
+.plotly-chart-container .modebar-btn[data-title="Toggle fullscreen"]     { order: 5; }
+.plotly-chart-container .modebar-btn[data-title="Reset axes"]            { order: 6; }
+.plotly-chart-container .modebar-btn[data-title="Pan"]                   { order: 7; }
+.plotly-chart-container .modebar-btn[data-title="Zoom"]                  { order: 8; }
+.plotly-chart-container .modebar-btn[data-title="Share chart..."],
+.plotly-chart-container .modebar-btn[data-title^="Produced with"]        { order: 9; }
+@media (max-width: 768px) {
+  .title-hero { font-size: 3.2rem !important; }
+  .sun { width: 140px; height: 140px; }
+}
