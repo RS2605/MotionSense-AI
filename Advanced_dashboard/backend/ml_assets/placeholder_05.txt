@@ -1,0 +1,1 @@
+The ml_assets folder contains: cleaned dataset, ml_ready dataset and the final trained model.
