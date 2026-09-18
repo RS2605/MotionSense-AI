@@ -177,7 +177,10 @@ def _predict_single(row: dict) -> dict:
 def root():
     return {"message": "MotionSense-AI API", "status": "online"}
 
-
+@app.head("/api/")
+def health_check():
+    return
+    
 @app.get("/api/overview")
 def overview():
     """Key project metrics for the Home page."""
